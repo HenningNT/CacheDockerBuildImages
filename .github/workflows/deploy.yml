@@ -23,7 +23,7 @@ jobs:
           cd src
           docker build . -t hello-image:preview
           docker save hello-image > /tmp/image.tar
-          docker images list
+          docker image ls
 
       - name: Upload Docker image to GitHub Artifacts
         uses: actions/upload-artifact@v3
@@ -54,3 +54,4 @@ jobs:
           docker load --input /tmp/image.tar
           docker tag hello-image:preview hello-image:latest
           docker rmi hello-image:preview
+          docker image ls

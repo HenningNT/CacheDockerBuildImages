@@ -22,13 +22,13 @@ jobs:
         run: |
           cd src
           docker build . -t hello-image
-          docker save hello-image > image.tar
+          docker save hello-image > /tmp/image.tar
 
       - name: Upload Docker image to GitHub Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: hello-image
-          path: image.tar
+          path: /tmp/image.tar
 
   test:
     needs: build

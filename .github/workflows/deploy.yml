@@ -16,6 +16,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build docker image
+        run: |
+          cd src
+          docker build .
+
 
   test:
     needs: build

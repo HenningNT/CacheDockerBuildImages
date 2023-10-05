@@ -21,7 +21,7 @@ jobs:
       - name: Build docker image
         run: |
           cd src
-          docker build . -t hello-image
+          docker build . -t hello-image:preview
           docker save hello-image > /tmp/image.tar
 
       - name: Upload Docker image to GitHub Artifacts

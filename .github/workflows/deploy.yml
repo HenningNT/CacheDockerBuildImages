@@ -46,8 +46,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: hello-image
-          path: ./image.tar
+          path: /tmp
 
       - name: Restore docker image
         run: |
-          docker load --input ./image.tar
+          docker load --input /tmp/image.tar

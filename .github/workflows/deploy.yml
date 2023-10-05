@@ -53,4 +53,4 @@ jobs:
         run: |
           docker load --input /tmp/image.tar
           docker tag hello-image:preview hello-image:latest
-          docker images list
+          docker rmi hello-image:preview

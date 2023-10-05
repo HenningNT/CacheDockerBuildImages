@@ -50,4 +50,4 @@ jobs:
 
       - name: Restore docker image
         run: |
-          docker load image.tar
+          docker load < image.tar

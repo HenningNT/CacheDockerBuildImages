@@ -21,25 +21,33 @@ jobs:
       - name: Build docker image
         run: |
           cd src
-          docker build .
+          docker build . -t hello-image
+          docker save hello-image > image.tar
 
+      - name: Upload Docker image to GitHub Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello-image
+          path: image.tar
 
   test:
     needs: build
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
   release:
     needs: test
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Download Docker image from GitHub Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: hello-image
+          path: ./image.tar
+
+      - name: Restore docker image
+        run: |
+          docker load image.tar

@@ -52,6 +52,5 @@ jobs:
       - name: Restore docker image
         run: |
           docker load --input /tmp/image.tar
-          docker tag hello-image:latest
-          docker rmi hello-image:preview
+          docker tag hello-image:preview hello-image:latest
           docker images list
